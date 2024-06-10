@@ -6,28 +6,23 @@ import {
 
 describe("rock-paper-scissors", () => {
   describe("play", () => {
-    test("given player move rock and opponent move rock should return player wins", () => {
-      const sut = createRockPaperScissors();
+    test.each([
+      [Move.Paper, Move.Paper, Result.Tie],
+      [Move.Rock, Move.Rock, Result.Tie],
+      [Move.Scissors, Move.Scissors, Result.Tie],
+      [Move.Paper, Move.Rock, Result.Win],
+      [Move.Paper, Move.Scissors, Result.Lose],
+      [Move.Rock, Move.Scissors, Result.Win],
+      [Move.Rock, Move.Paper, Result.Lose],
+    ])(
+      "given player move %s and opponent move %s should return '%s'",
+      (playerMove: string, opponentMove: string, result: string) => {
+        const sut = createRockPaperScissors();
 
-      const actual = sut.play(Move.Paper, Move.Rock);
+        const actual = sut.play(playerMove, opponentMove);
 
-      expect(actual).toBe(Result.Win);
-    });
-
-    test("given player move paper and opponent move scissors should return player loses", () => {
-      const sut = createRockPaperScissors();
-
-      const actual = sut.play(Move.Paper, Move.Scissors);
-
-      expect(actual).toBe(Result.Lose);
-    });
-
-    test("given player move paper and opponent move paper should return tie", () => {
-      const sut = createRockPaperScissors();
-
-      const actual = sut.play(Move.Paper, Move.Paper);
-
-      expect(actual).toBe(Result.Tie);
-    });
+        expect(actual).toBe(result);
+      },
+    );
   });
 });
