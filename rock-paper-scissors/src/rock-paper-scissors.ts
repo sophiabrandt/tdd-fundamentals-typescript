@@ -11,24 +11,46 @@ export enum Result {
 }
 
 interface RockPaperScissors {
-  play(p1Move: string, p2Move: string): string;
+  play(playerMove: string, opponentMove: string): string;
 }
 
 export function createRockPaperScissors(): RockPaperScissors {
   return {
-    play(p1Move: Move, p2Move: Move) {
+    play(playerMove: Move, opponentMove: Move) {
       const table = [
-        { p1: Move.Paper, p2: Move.Paper, result: Result.Tie },
-        { p1: Move.Rock, p2: Move.Rock, result: Result.Tie },
-        { p1: Move.Scissors, p2: Move.Scissors, result: Result.Tie },
-        { p1: Move.Paper, p2: Move.Rock, result: Result.Win },
-        { p1: Move.Paper, p2: Move.Scissors, result: Result.Lose },
-        { p1: Move.Rock, p2: Move.Scissors, result: Result.Win },
-        { p1: Move.Rock, p2: Move.Paper, result: Result.Lose },
+        {
+          playerMove: Move.Paper,
+          opponentMove: Move.Paper,
+          result: Result.Tie,
+        },
+        { playerMove: Move.Rock, opponentMove: Move.Rock, result: Result.Tie },
+        {
+          playerMove: Move.Scissors,
+          opponentMove: Move.Scissors,
+          result: Result.Tie,
+        },
+        { playerMove: Move.Paper, opponentMove: Move.Rock, result: Result.Win },
+        {
+          playerMove: Move.Paper,
+          opponentMove: Move.Scissors,
+          result: Result.Lose,
+        },
+        {
+          playerMove: Move.Rock,
+          opponentMove: Move.Scissors,
+          result: Result.Win,
+        },
+        {
+          playerMove: Move.Rock,
+          opponentMove: Move.Paper,
+          result: Result.Lose,
+        },
       ];
       return (
-        table.find((row) => p1Move === row.p1 && p2Move === row.p2)?.result ??
-        Result.Tie
+        table.find(
+          (row) =>
+            playerMove === row.playerMove && opponentMove === row.opponentMove,
+        )?.result ?? Result.Tie
       );
     },
   };
