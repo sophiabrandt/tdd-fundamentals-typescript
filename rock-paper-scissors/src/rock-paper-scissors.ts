@@ -4,7 +4,7 @@ export enum Move {
   Scissors = "Scissors",
 }
 
-export enum Result {
+export enum Outcome {
   Win = "Player wins",
   Lose = "Player loses",
   Tie = "Tie",
@@ -17,40 +17,20 @@ interface RockPaperScissors {
 export function createRockPaperScissors(): RockPaperScissors {
   return {
     play(playerMove: Move, opponentMove: Move) {
-      const table = [
-        {
-          playerMove: Move.Paper,
-          opponentMove: Move.Paper,
-          result: Result.Tie,
-        },
-        { playerMove: Move.Rock, opponentMove: Move.Rock, result: Result.Tie },
-        {
-          playerMove: Move.Scissors,
-          opponentMove: Move.Scissors,
-          result: Result.Tie,
-        },
-        { playerMove: Move.Paper, opponentMove: Move.Rock, result: Result.Win },
-        {
-          playerMove: Move.Paper,
-          opponentMove: Move.Scissors,
-          result: Result.Lose,
-        },
-        {
-          playerMove: Move.Rock,
-          opponentMove: Move.Scissors,
-          result: Result.Win,
-        },
-        {
-          playerMove: Move.Rock,
-          opponentMove: Move.Paper,
-          result: Result.Lose,
-        },
+      const scenarios = [
+        { playerMove: Move.Paper, p2: Move.Paper, result: Outcome.Tie },
+        { playerMove: Move.Rock, p2: Move.Rock, result: Outcome.Tie },
+        { playerMove: Move.Scissors, p2: Move.Scissors, result: Outcome.Tie },
+        { playerMove: Move.Paper, p2: Move.Rock, result: Outcome.Win },
+        { playerMove: Move.Paper, p2: Move.Scissors, result: Outcome.Lose },
+        { playerMove: Move.Rock, p2: Move.Scissors, result: Outcome.Win },
+        { playerMove: Move.Rock, p2: Move.Paper, result: Outcome.Lose },
       ];
       return (
-        table.find(
-          (row) =>
-            playerMove === row.playerMove && opponentMove === row.opponentMove,
-        )?.result ?? Result.Tie
+        scenarios.find(
+          (scenario) =>
+            playerMove === scenario.playerMove && opponentMove === scenario.p2,
+        )?.result ?? Outcome.Tie
       );
     },
   };
