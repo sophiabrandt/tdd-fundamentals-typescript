@@ -3,6 +3,7 @@ import {
   Outcome,
   createRockPaperScissors,
 } from "../src/rock-paper-scissors";
+import { describe, test, expect } from "vitest";
 
 describe("rock-paper-scissors", () => {
   describe("play", () => {
