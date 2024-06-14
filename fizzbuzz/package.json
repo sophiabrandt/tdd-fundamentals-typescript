@@ -1,0 +1,19 @@
+{
+  "name": "fizzbuzz",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "^1.1.3",
+    "prettier": "^3.3.2",
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "scripts": {
+    "test": "vitest",
+    "test:w": "vitest -w",
+    "format": "prettier --write ."
+  }
+}
